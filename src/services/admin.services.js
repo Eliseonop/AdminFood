@@ -1,3 +1,4 @@
+import { Token } from "@mui/icons-material"
 import axiosConfig from "./config/axios.config"
 
 export const createAdmin = data => {
@@ -5,5 +6,16 @@ export const createAdmin = data => {
 }
 
 export const loginAdmin = data => {
-  return axiosConfig.post('/api/loginadmin', data)
+  return new Promise((resolve, reject) => {
+    resolve({
+      data: {
+        token : '1234567890'
+      }
+    })
+    // return {
+    //   data: {
+    //     token: '1234567890'
+    //   }
+    // }
+  })
 }

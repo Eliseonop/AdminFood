@@ -1,4 +1,5 @@
-import axiosConfig from "./config/axios.config"
+import axiosConfig from './config/axios.config'
+import { DATA_PRODUCTOS } from './mocks/DATA_PRODUCTOS.js'
 
 export const createProduct = (data, token) => {
   return axiosConfig.post('/api/productos', data, {
@@ -7,7 +8,11 @@ export const createProduct = (data, token) => {
 }
 
 export const getProducts = () => {
-  return axiosConfig.get('/api/productos')
+  return new Promise((resolve, reject) => {
+    return resolve({
+      data: DATA_PRODUCTOS
+    })
+  })
 }
 
 export const updateProduct = (id, data, token) => {

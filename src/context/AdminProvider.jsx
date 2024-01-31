@@ -6,8 +6,11 @@ import { useLocalStorage } from '../hook/useLocalStorage'
 export const AdminContext = createContext()
 
 export default function AdminProvider ({ children }) {
-  const [admin, setAdmin] = useLocalStorage('user', null)
-  const [token, setToken] = useLocalStorage('token', null)
+  const [admin, setAdmin] = useLocalStorage('user', {
+    email: 'holas',
+    password: 'quepasa'
+  })
+  const [token, setToken] = useLocalStorage('token', 'holas')
 
   const enviarToken = token => {
     return setToken(token)
@@ -16,22 +19,22 @@ export default function AdminProvider ({ children }) {
     return setAdmin(admin)
   }
   useEffect(() => {
-    if (token) {
-      const decoded = jwtDecode(token)
-      eviarAdmin(decoded)
-    } else {
-      eviarAdmin(null)
-    }
+    // if (token) {
+    //   // const decoded = jwtDecode(token)
+    //   // eviarAdmin(token)
+    // } else {
+    //   eviarAdmin(null)
+    // }
   }, [token])
   useEffect(() => {
-    if (admin) {
-      const decoded = jwtDecode(token)
-      const currentTime = Date.now() / 1000
-      if (decoded.exp < currentTime) {
-        setAdmin(null)
-        setToken(null)
-      }
-    }
+    // if (admin) {
+    //   const decoded = jwtDecode(token)
+    //   const currentTime = Date.now() / 1000
+    //   if (decoded.exp < currentTime) {
+    //     setAdmin(null)
+    //     setToken(null)
+    //   }
+    // }
   }, [])
 
   const value = {

@@ -11,6 +11,7 @@ import Modal from './pure/Modal'
 import ModalEdit from './pure/ModalEdit'
 import SearchProduct from './pure/SearchProduct'
 import TableProducts from './TableProducts'
+import { DATA_PRODUCTOS } from '../services/mocks/DATA_PRODUCTOS.js'
 
 export default function Products () {
   const [products, setProducts] = useState([])
@@ -35,7 +36,7 @@ export default function Products () {
     setLoading(true)
     createProduct(product, window.localStorage.getItem('token'))
       .then(res => {
-        console.log(res)
+        // console.log(res)
         getProducts().then(res => {
           setProducts(res.data)
           setLoading(false)
@@ -48,29 +49,24 @@ export default function Products () {
   }
 
   useEffect(() => {
-    setLoading(true)
-    getProducts()
-      .then(res => {
-        setProducts(res.data)
-        setLoading(false)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    // setLoading(true)
+    // getProducts()
+    //   .then(res => {
+    // console.log(res)
+    setProducts(DATA_PRODUCTOS)
+    setLoading(false)
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
   }, [])
 
   const newProducts = products.filter(product =>
     product.nombre.toLowerCase().includes(name.toLowerCase())
   )
   const handleEdit = product => {
-    getProductById(product._id)
-      .then(res => {
-        setProduct(res.data)
-        setOpenModal2(true)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    setProduct(product)
+    setOpenModal2(true)
   }
   const handleConfirmEdit = id => {
     setLoading2(true)

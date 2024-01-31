@@ -20,6 +20,7 @@ export function LoginFormAdmin () {
 
     loginAdmin(admin)
       .then(res => {
+        console.log(res)
         enviarToken(res.data.token)
         navigate('/products')
         setLoading(false)
